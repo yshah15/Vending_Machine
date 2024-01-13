@@ -1,0 +1,289 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 12/27/2023 11:47:40 AM
+// Design Name: 
+// Module Name: vm_3_product
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module vm_3_product(reset,clk,in,out,change);
+input reset;
+input clk;
+input [1:0]in; // 01 for 5 Rs., 10 for 10 Rs., 11 for 15Rs.
+output reg out;
+output reg[1:0] change;
+
+reg [1:0]c_state,n_state;
+
+parameter s0 = 2'b00;
+parameter s1 = 2'b01;
+parameter s2 = 2'b10;
+parameter s3 = 2'b11;
+parameter n=15;
+
+always @(posedge clk)
+begin
+    if(n==10)
+        begin
+            if(reset)
+              begin
+                c_state = 0;
+                n_state = 0;
+              end
+            else
+              begin
+                c_state = n_state;
+                
+                case(c_state)
+                    s0:
+                        if(in == 2'b00)
+                            begin
+                              n_state = s0;
+                              out = 0;
+                              change = 2'b00;
+                            end
+                            
+                        else if(in == 2'b01)
+                            begin
+                              n_state = s1;
+                              out = 0;
+                              change = 2'b00;
+                            end
+                            
+                        else if(in == 2'b10)
+                            begin
+                              n_state = s0;
+                              out = 0;
+                              change = 2'b00;
+                            end
+                            
+                   s1:
+                        if(in == 2'b00)
+                            begin
+                              n_state = s0;
+                              out = 0;
+                              change = 2'b01;
+                            end
+                            
+                        else if(in == 2'b01)
+                            begin
+                              n_state = s0;
+                              out = 1;
+                              change = 2'b00;
+                            end
+                            
+                        else if(in == 2'b10)
+                            begin
+                              n_state = s0;
+                              out = 1;
+                              change = 2'b01;
+                            end
+                        
+                endcase
+              end
+              
+        end
+        
+    else if(n==15)
+        begin
+            if(reset)
+              begin
+                c_state = 0;
+                n_state = 0;
+              end
+            else
+              begin
+                c_state = n_state;
+                
+                case(c_state)
+                    s0:
+                        if(in == 2'b00)
+                            begin
+                              n_state = s0;
+                              out = 0;
+                              change = 2'b00;
+                            end
+                            
+                        else if(in == 2'b01)
+                            begin
+                              n_state = s1;
+                              out = 0;
+                              change = 2'b00;
+                            end
+                            
+                        else if(in == 2'b10)
+                            begin
+                              n_state = s2;
+                              out = 0;
+                              change = 2'b00;
+                            end
+                            
+                   s1:
+                        if(in == 2'b00)
+                            begin
+                              n_state = s0;
+                              out = 0;
+                              change = 2'b01;
+                            end
+                            
+                        else if(in == 2'b01)
+                            begin
+                              n_state = s2;
+                              out = 0;
+                              change = 2'b00;
+                            end
+                            
+                        else if(in == 2'b10)
+                            begin
+                              n_state = s0;
+                              out = 1;
+                              change = 2'b00;
+                            end
+                            
+                   s2:
+                        if(in == 2'b00)
+                            begin
+                              n_state = s0;
+                              out = 0;
+                              change = 2'b10;
+                            end
+                            
+                        else if(in == 2'b01)
+                            begin
+                              n_state = s0;
+                              out = 1;
+                              change = 2'b00;
+                            end
+                            
+                        else if(in == 2'b10)
+                            begin
+                              n_state = s0;
+                              out = 1;
+                              change = 2'b01;
+                            end     
+                endcase
+              end
+              
+        end
+    
+    else if(n==20)
+        begin
+            if(reset)
+              begin
+                c_state = 0;
+                n_state = 0;
+              end
+            else
+              begin
+                c_state = n_state;
+                
+                case(c_state)
+                    s0:
+                        if(in == 2'b00)
+                            begin
+                              n_state = s0;
+                              out = 0;
+                              change = 2'b00;
+                            end
+                            
+                        else if(in == 2'b01)
+                            begin
+                              n_state = s1;
+                              out = 0;
+                              change = 2'b00;
+                            end
+                            
+                        else if(in == 2'b10)
+                            begin
+                              n_state = s2;
+                              out = 0;
+                              change = 2'b00;
+                            end
+                            
+                   s1:
+                        if(in == 2'b00)
+                            begin
+                              n_state = s0;
+                              out = 0;
+                              change = 2'b01;
+                            end
+                            
+                        else if(in == 2'b01)
+                            begin
+                              n_state = s2;
+                              out = 0;
+                              change = 2'b00;
+                            end
+                            
+                        else if(in == 2'b10)
+                            begin
+                              n_state = s3;
+                              out = 0;
+                              change = 2'b00;
+                            end
+                            
+                   s2:
+                        if(in == 2'b00)
+                            begin
+                              n_state = s0;
+                              out = 0;
+                              change = 2'b10;
+                            end
+                            
+                        else if(in == 2'b01)
+                            begin
+                              n_state = s3;
+                              out = 0;
+                              change = 2'b00;
+                            end
+                            
+                        else if(in == 2'b10)
+                            begin
+                              n_state = s0;
+                              out = 1;
+                              change = 2'b00;
+                            end 
+                            
+                   s3:
+                        if(in == 2'b00)
+                            begin
+                              n_state = s0;
+                              out = 0;
+                              change = 2'b11;
+                            end
+                            
+                        else if(in == 2'b01)
+                            begin
+                              n_state = s0;
+                              out = 1;
+                              change = 2'b00;
+                            end
+                            
+                        else if(in == 2'b10)
+                            begin
+                              n_state = s0;
+                              out = 1;
+                              change = 2'b01;
+                            end      
+                endcase
+              end
+              
+        end   
+end
+
+
+endmodule
